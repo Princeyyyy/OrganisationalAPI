@@ -1,0 +1,8 @@
+models/User.java
+ models.User
+models/DepartmentNews.java
+ models.DepartmentNews
+models/GeneralNews.java
+ models.GeneralNews
+models/Department.java
+ models.Department
