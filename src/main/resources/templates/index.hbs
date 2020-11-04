@@ -1,0 +1,29 @@
+{{#partial "title"}}News{{/partial}}
+{{#partial "content"}}
+
+    {{#if generalnews}}
+        <div class="col-md-6">
+            <h3>General News</h3>
+            <table class="table table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+
+                    <th scope="col">Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each generalnews}}
+                    <tr>
+                        <td>{{title}}</td>
+
+                        <td>{{content}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    {{/if}}
+
+{{/partial}}
+{{> layout.hbs}}
