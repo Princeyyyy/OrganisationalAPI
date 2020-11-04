@@ -27,7 +27,14 @@ public class App {
 
 
         //           API   ROUTES
+        get("/api/generalnews", (req, res) -> {
+            return gson.toJson(generalNewsDAO.getAllGeneralNews());
+        });
 
+        get("/api/generalnews/:id", (req, res) -> {
+            int id = Integer.parseInt(req.params("id"));
+            return gson.toJson(generalNewsDAO.getGeneralNewsById(id));
+        });
 
 
         //          UI ROUTES
