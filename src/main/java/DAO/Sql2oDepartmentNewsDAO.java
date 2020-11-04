@@ -32,7 +32,7 @@ public class Sql2oDepartmentNewsDAO implements DepartmentNewsDAO {
 
     @Override
     public List<DepartmentNews> getAllDepartmentNews() {
-        String sql = "SELECT * FROM news WHERE departmentId <> ''";
+        String sql = "SELECT * FROM news WHERE departmentId IS NOT NULL";
         try(Connection con = sql2o.open()){
             return con.createQuery(sql)
                     .executeAndFetch(DepartmentNews.class);

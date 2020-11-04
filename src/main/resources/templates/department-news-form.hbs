@@ -1,0 +1,33 @@
+{{#partial "content"}}
+    <div class="container">
+        <br/>
+
+        <h5 class="text-center">Add General News</h5>
+        <hr>
+        <form method="Post" action="/adddepartmentnews">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+            </div>
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea class="form-control" id="content" name="content" placeholder="Content">
+            </textarea>
+            </div>
+            <div class="form-group">
+                <label for="squad">Department</label>
+                <select class="form-control" id="departments" name="department" required>
+                    {{#if departments}}
+                        {{#each departments}}
+                            <option value="{{id}}">{{departmentName}}</option>
+                        {{/each}}
+                    {{/if}}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+{{/partial}}
+{{> layout.hbs}}

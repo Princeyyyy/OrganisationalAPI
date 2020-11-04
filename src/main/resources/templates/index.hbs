@@ -77,5 +77,33 @@
         </div>
     {{/if}}
 
+    {{#if departmentNews}}
+        <div class="col-md-6">
+            <h3>Department News</h3>
+            <table class="table table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">Title</th>
+
+                    <th scope="col">Content</th>
+
+                    <th scope="col">Department Id</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each departmentNews}}
+                    <tr>
+                        <td>{{title}}</td>
+
+                        <td>{{content}}</td>
+
+                        <td>{{departmentId}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    {{/if}}
+
 {{/partial}}
 {{> layout.hbs}}

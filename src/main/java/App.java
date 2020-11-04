@@ -1,9 +1,7 @@
-import DAO.Sql2oDepartmentDAO;
-import DAO.Sql2oUserDAO;
-import DAO.UserDAO;
+import DAO.*;
 import com.google.gson.Gson;
-import DAO.Sql2oGeneralNewsDAO;
 import models.Department;
+import models.DepartmentNews;
 import models.GeneralNews;
 import models.User;
 import org.sql2o.Sql2o;
@@ -28,6 +26,7 @@ public class App {
         Sql2oGeneralNewsDAO generalNewsDAO = new Sql2oGeneralNewsDAO(sql2o);
         Sql2oDepartmentDAO departmentDAO = new Sql2oDepartmentDAO(sql2o);
         Sql2oUserDAO userDAO = new Sql2oUserDAO(sql2o);
+        Sql2oDepartmentNewsDAO departmentNewsDAO = new Sql2oDepartmentNewsDAO(sql2o);
 
         Map<String, Object> model = new HashMap<>();
         Gson gson = new Gson();
@@ -91,6 +90,24 @@ public class App {
             int departmentId = Integer.parseInt(req.queryParams("department"));
             User newUser = new User(name,position,role, departmentId);
             userDAO.add(newUser);
+            model.put("users", userDAO.getAllUsers());
+            model.put("departments", departmentDAO.getAllDepartments());
+            model.put("generalnews",generalNewsDAO.getAllGeneralNews());
+            return new ModelAndView(model, "index.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/adddepartmentnews", (req, res) -> {
+            model.put("departments", departmentDAO.getAllDepartments());
+            return new ModelAndView(model, "department-news-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/adddepartmentnews", (req, res) -> {
+            String title = req.queryParams("title");
+            String content = req.queryParams("content");
+            int departmentId = Integer.parseInt(req.queryParams("department"));
+            DepartmentNews newDepartmentNews = new DepartmentNews(title,content,departmentId);
+            departmentNewsDAO.add(newDepartmentNews);
+            model.put("departmentNews", departmentNewsDAO.getAllDepartmentNews());
             model.put("users", userDAO.getAllUsers());
             model.put("departments", departmentDAO.getAllDepartments());
             model.put("generalnews",generalNewsDAO.getAllGeneralNews());
