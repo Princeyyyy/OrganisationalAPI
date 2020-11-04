@@ -1,0 +1,23 @@
+{{#partial "content"}}
+    <div class="container">
+        <br/>
+
+        <h5 class="text-center">Add Department</h5>
+        <hr>
+        <form method="Post" action="/adddepartment">
+            <div class="form-group">
+                <label for="title">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Department Name">
+            </div>
+            <div class="form-group">
+                <label for="content">Description</label>
+                <textarea class="form-control" id="description" name="description" placeholder="Content">
+            </textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+{{/partial}}
+{{> layout.hbs}}

@@ -1,5 +1,7 @@
+import DAO.Sql2oDepartmentDAO;
 import com.google.gson.Gson;
 import DAO.Sql2oGeneralNewsDAO;
+import models.Department;
 import models.GeneralNews;
 import org.sql2o.Sql2o;
 import spark.ModelAndView;
@@ -21,6 +23,7 @@ public class App {
         Sql2o sql2o = new Sql2o(connectionString, "prince", "prince12");
 
         Sql2oGeneralNewsDAO generalNewsDAO = new Sql2oGeneralNewsDAO(sql2o);
+        Sql2oDepartmentDAO departmentDAO = new Sql2oDepartmentDAO(sql2o);
 
         Map<String, Object> model = new HashMap<>();
         Gson gson = new Gson();
@@ -39,6 +42,7 @@ public class App {
 
         //          UI ROUTES
         get("/", (req, res) -> {
+            model.put("departments", departmentDAO.getAllDepartments());
             model.put("generalnews", generalNewsDAO.getAllGeneralNews());
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
@@ -52,6 +56,20 @@ public class App {
             String content = req.queryParams("content");
             GeneralNews newGeneralNews = new GeneralNews(title,content);
             generalNewsDAO.add(newGeneralNews);
+            model.put("generalnews",generalNewsDAO.getAllGeneralNews());
+            return new ModelAndView(model, "index.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/adddepartment", (req, res) -> {
+            return new ModelAndView(model, "department-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/adddepartment", (req, res) -> {
+            String name = req.queryParams("name");
+            String description = req.queryParams("description");
+            Department newDepartment = new Department(name,description);
+            departmentDAO.add(newDepartment);
+            model.put("departments", departmentDAO.getAllDepartments());
             model.put("generalnews",generalNewsDAO.getAllGeneralNews());
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
