@@ -46,6 +46,31 @@ public class App {
             return gson.toJson(departmentNewsDAO.getAllDepartmentNews());
         });
 
+        get("/api/departments", (req, res) -> {
+            List<Department> departments = departmentDAO.getAllDepartments();
+            for(Department department: departments){
+                int departmentId = department.getId();
+                List<User> usersInDepartment = departmentDAO.getDepartmentUsersById(departmentId);
+                department.setDepartmentUsers(usersInDepartment);
+                department.setNoOfUsers(usersInDepartment.size());
+                List<DepartmentNews> newsInDepartment = departmentDAO.getDepartmentNewsById(departmentId);
+                department.setDepartmentNews(newsInDepartment);
+            }
+            return gson.toJson(departments);
+        });
+
+        get("/api/departments/:id", (req, res) -> {
+            int id = Integer.parseInt(req.params("id"));
+            Department department = departmentDAO.getDepartmentById(id);
+            int departmentId = department.getId();
+            List<User> usersInDepartment = departmentDAO.getDepartmentUsersById(departmentId);
+            department.setDepartmentUsers(usersInDepartment);
+            department.setNoOfUsers(usersInDepartment.size());
+            List<DepartmentNews> newsInDepartment = departmentDAO.getDepartmentNewsById(departmentId);
+            department.setDepartmentNews(newsInDepartment);
+            return gson.toJson(department);
+        });
+
 
         //          UI ROUTES
         get("/", (req, res) -> {
