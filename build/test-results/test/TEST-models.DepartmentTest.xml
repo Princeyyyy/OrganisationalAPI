@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="models.DepartmentTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2020-11-05T21:16:31" hostname="hp-elitebook-folio-1040-g2" time="0.003">
-  <properties/>
-  <testcase name="addDepartment_getDescription" classname="models.DepartmentTest" time="0.002"/>
-  <testcase name="addDepartment_getName" classname="models.DepartmentTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
