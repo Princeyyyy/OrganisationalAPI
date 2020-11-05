@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="models.UserTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2020-11-05T21:12:15" hostname="hp-elitebook-folio-1040-g2" time="0.002">
-  <properties/>
-  <testcase name="addEmployee_getPosition" classname="models.UserTest" time="0.001"/>
-  <testcase name="addEmployee_getsName" classname="models.UserTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
