@@ -42,6 +42,10 @@ public class App {
             return gson.toJson(generalNewsDAO.getGeneralNewsById(id));
         });
 
+        get("/api/departmentnews", (req, res) -> {
+            return gson.toJson(departmentNewsDAO.getAllDepartmentNews());
+        });
+
 
         //          UI ROUTES
         get("/", (req, res) -> {
