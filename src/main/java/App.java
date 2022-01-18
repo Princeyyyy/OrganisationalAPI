@@ -48,7 +48,7 @@ public class App {
 
         get("/api/departments", (req, res) -> {
             List<Department> departments = departmentDAO.getAllDepartments();
-            for(Department department: departments){
+            for (Department department : departments) {
                 int departmentId = department.getId();
                 List<User> usersInDepartment = departmentDAO.getDepartmentUsersById(departmentId);
                 department.setDepartmentUsers(usersInDepartment);
@@ -87,9 +87,9 @@ public class App {
         post("/addgeneral", (req, res) -> {
             String title = req.queryParams("title");
             String content = req.queryParams("content");
-            GeneralNews newGeneralNews = new GeneralNews(title,content);
+            GeneralNews newGeneralNews = new GeneralNews(title, content);
             generalNewsDAO.add(newGeneralNews);
-            model.put("generalnews",generalNewsDAO.getAllGeneralNews());
+            model.put("generalnews", generalNewsDAO.getAllGeneralNews());
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -100,10 +100,10 @@ public class App {
         post("/adddepartment", (req, res) -> {
             String name = req.queryParams("name");
             String description = req.queryParams("description");
-            Department newDepartment = new Department(name,description);
+            Department newDepartment = new Department(name, description);
             departmentDAO.add(newDepartment);
             model.put("departments", departmentDAO.getAllDepartments());
-            model.put("generalnews",generalNewsDAO.getAllGeneralNews());
+            model.put("generalnews", generalNewsDAO.getAllGeneralNews());
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -117,11 +117,11 @@ public class App {
             String position = req.queryParams("position");
             String role = req.queryParams("role");
             int departmentId = Integer.parseInt(req.queryParams("department"));
-            User newUser = new User(name,position,role, departmentId);
+            User newUser = new User(name, position, role, departmentId);
             userDAO.add(newUser);
             model.put("users", userDAO.getAllUsers());
             model.put("departments", departmentDAO.getAllDepartments());
-            model.put("generalnews",generalNewsDAO.getAllGeneralNews());
+            model.put("generalnews", generalNewsDAO.getAllGeneralNews());
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -134,12 +134,12 @@ public class App {
             String title = req.queryParams("title");
             String content = req.queryParams("content");
             int departmentId = Integer.parseInt(req.queryParams("department"));
-            DepartmentNews newDepartmentNews = new DepartmentNews(title,content,departmentId);
+            DepartmentNews newDepartmentNews = new DepartmentNews(title, content, departmentId);
             departmentNewsDAO.add(newDepartmentNews);
             model.put("departmentNews", departmentNewsDAO.getAllDepartmentNews());
             model.put("users", userDAO.getAllUsers());
             model.put("departments", departmentDAO.getAllDepartments());
-            model.put("generalnews",generalNewsDAO.getAllGeneralNews());
+            model.put("generalnews", generalNewsDAO.getAllGeneralNews());
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
     }

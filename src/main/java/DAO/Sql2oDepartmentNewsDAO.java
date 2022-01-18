@@ -19,13 +19,13 @@ public class Sql2oDepartmentNewsDAO implements DepartmentNewsDAO {
     @Override
     public void add(DepartmentNews departmentNews) {
         String sql = "INSERT INTO news (title, content, departmentId) values (:title, :content, :departmentId)";
-        try(Connection con = sql2o.open()) {
-            int id = (int) con.createQuery(sql,true)
+        try (Connection con = sql2o.open()) {
+            int id = (int) con.createQuery(sql, true)
                     .bind(departmentNews)
                     .executeUpdate()
                     .getKey();
             departmentNews.setId(id);
-        }catch (Sql2oException ex){
+        } catch (Sql2oException ex) {
             System.out.println(ex);
         }
     }
@@ -33,10 +33,10 @@ public class Sql2oDepartmentNewsDAO implements DepartmentNewsDAO {
     @Override
     public List<DepartmentNews> getAllDepartmentNews() {
         String sql = "SELECT * FROM news WHERE departmentId IS NOT NULL";
-        try(Connection con = sql2o.open()){
+        try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
                     .executeAndFetch(DepartmentNews.class);
-        }catch(Sql2oException ex){
+        } catch (Sql2oException ex) {
             System.out.println(ex);
             return null;
         }
@@ -46,11 +46,11 @@ public class Sql2oDepartmentNewsDAO implements DepartmentNewsDAO {
     @Override
     public DepartmentNews getDepartmentNewsById(int id) {
         String sql = "SELECT * FROM news WHERE id =:id";
-        try(Connection con = sql2o.open()){
+        try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
-                    .addParameter("id",id)
+                    .addParameter("id", id)
                     .executeAndFetchFirst(DepartmentNews.class);
-        }catch(Sql2oException ex){
+        } catch (Sql2oException ex) {
             System.out.println(ex);
             return null;
         }
