@@ -33,18 +33,14 @@ public class App {
 
 
         //           API   ROUTES
-        get("/api/generalnews", (req, res) -> {
-            return gson.toJson(generalNewsDAO.getAllGeneralNews());
-        });
+        get("/api/generalnews", (req, res) -> gson.toJson(generalNewsDAO.getAllGeneralNews()));
 
         get("/api/generalnews/:id", (req, res) -> {
             int id = Integer.parseInt(req.params("id"));
             return gson.toJson(generalNewsDAO.getGeneralNewsById(id));
         });
 
-        get("/api/departmentnews", (req, res) -> {
-            return gson.toJson(departmentNewsDAO.getAllDepartmentNews());
-        });
+        get("/api/departmentnews", (req, res) -> gson.toJson(departmentNewsDAO.getAllDepartmentNews()));
 
         get("/api/departments", (req, res) -> {
             List<Department> departments = departmentDAO.getAllDepartments();
